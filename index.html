@@ -64,7 +64,7 @@ button.ghost { background: transparent; color: var(--accent); border: 1.5px soli
 
 .clock {
   display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-  background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 24px;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px;
 }
 .clock-main { display: flex; flex-direction: column; gap: 2px; }
 .time { font: 500 clamp(2.6rem, 10vw, 3.8rem)/1 var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
@@ -263,6 +263,7 @@ function beginTask(task) {
     $("taskImg").src = task.image; $("taskImg2").src = task.image;
     $("taskImg").hidden = false; $("taskImg2").hidden = false;
   }
+  $("taskImg").after($("clock"));
   $("clock").hidden = false;
   $("clockLabel").textContent = "準備時間 残り";
   setPhase("", "準備中");
@@ -286,6 +287,7 @@ function startRecording() {
   recorder.onstop = finish;
   recorder.start(1000);
   tRecStart = performance.now();
+  $("taskImg2").after($("clock"));
   $("clockLabel").textContent = "発話時間 残り";
   setPhase("recording", "録音中");
   show("stepRec");
